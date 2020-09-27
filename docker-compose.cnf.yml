@@ -7,6 +7,11 @@ services:
             - "30102:27017"
         command: mongod --replSet cnf-serv --configsvr --port 27017 --oplogSize 16 --noprealloc --smallfiles
         restart: always
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - ./data/cnf/node2:/data/db
 
     mongo-cnf-3:
         container_name: "mongo-cnf-3"
@@ -15,6 +20,11 @@ services:
             - "30103:27017"
         command: mongod --replSet cnf-serv --configsvr --port 27017 --oplogSize 16 --noprealloc --smallfiles
         restart: always 
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - ./data/cnf/node3:/data/db
 
     mongo-cnf-1:
         container_name: "mongo-cnf-1"
@@ -26,6 +36,11 @@ services:
             - mongo-cnf-2:mongo-cnf-2
             - mongo-cnf-3:mongo-cnf-3
         restart: always
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - ./data/cnf/node1:/data/db
 
     mongo-cnf-setup:
         container_name: "mongo-cnf-setup"

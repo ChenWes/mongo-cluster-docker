@@ -7,6 +7,11 @@ services:
             - "30022:27017"
         command: mongod --replSet rs2 --shardsvr --port 27017  --oplogSize 16 --noprealloc --smallfiles
         restart: always
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - ./data/rs2/node2:/data/db
 
     mongo-2-3:
         container_name: "mongo-2-3"
@@ -15,6 +20,11 @@ services:
             - "30023:27017"
         command: mongod --replSet rs2 --shardsvr --port 27017  --oplogSize 16 --noprealloc --smallfiles
         restart: always 
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - ./data/rs2/node3:/data/db
 
     mongo-2-1:
         container_name: "mongo-2-1"
@@ -26,6 +36,11 @@ services:
             - mongo-2-2:mongo-2-2
             - mongo-2-3:mongo-2-3
         restart: always
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - ./data/rs2/node1:/data/db
 
     mongo-rs2-setup:
         container_name: "mongo-rs2-setup"

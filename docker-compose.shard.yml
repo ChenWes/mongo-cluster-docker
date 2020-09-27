@@ -21,6 +21,11 @@ services:
             - mongo-2-3:mongo-2-3
         command: mongos --configdb cnf-serv/mongo-cnf-1:27017,mongo-cnf-2:27017,mongo-cnf-3:27017 --port 27017 --bind_ip 0.0.0.0
         restart: always
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - ./data/shard/node1:/data/db
 
     mongo-shard-setup:
         container_name: "mongo-shard-setup"
