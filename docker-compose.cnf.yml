@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
     mongo-cnf-2:
         container_name: "mongo-cnf-2"
@@ -8,11 +8,12 @@ services:
         command: mongod --replSet cnf-serv --configsvr --port 27017 --oplogSize 16 --noprealloc --smallfiles
         restart: always
         environment:
-          - MONGO_DATA_DIR=/data/db
-          - MONGO_LOG_DIR=/dev/null
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
         volumes:
-            # - ./data/cnf/node2:/data/db
-            - ./data/cnf/node2:/data/configdb
+            # 配置节点不需要数据文件
+            - ./data/cnf/node2/db:/data/db
+            - ./data/cnf/node2/configdb:/data/configdb
 
     mongo-cnf-3:
         container_name: "mongo-cnf-3"
@@ -20,13 +21,14 @@ services:
         ports:
             - "30103:27017"
         command: mongod --replSet cnf-serv --configsvr --port 27017 --oplogSize 16 --noprealloc --smallfiles
-        restart: always 
+        restart: always
         environment:
-          - MONGO_DATA_DIR=/data/db
-          - MONGO_LOG_DIR=/dev/null
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
         volumes:
-            # - ./data/cnf/node3:/data/db
-            - ./data/cnf/node3:/data/configdb
+            # 配置节点不需要数据文件
+            - ./data/cnf/node3/db:/data/db
+            - ./data/cnf/node3/configdb:/data/configdb
 
     mongo-cnf-1:
         container_name: "mongo-cnf-1"
@@ -39,11 +41,12 @@ services:
             - mongo-cnf-3:mongo-cnf-3
         restart: always
         environment:
-          - MONGO_DATA_DIR=/data/db
-          - MONGO_LOG_DIR=/dev/null
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
         volumes:
-            # - ./data/cnf/node1:/data/db
-            - ./data/cnf/node1:/data/configdb
+            # 配置节点不需要数据文件
+            - ./data/cnf/node1/db:/data/db
+            - ./data/cnf/node1/configdb:/data/configdb
 
     mongo-cnf-setup:
         container_name: "mongo-cnf-setup"
@@ -64,4 +67,4 @@ services:
             - MONGO3=mongo-cnf-3
             - RS=cnf-serv
             - PORT=27017
-        entrypoint: [ "/scripts/setup-cnf.sh" ]
+        entrypoint: ["/scripts/setup-cnf.sh"]

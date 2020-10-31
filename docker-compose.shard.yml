@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
     mongo-router:
         container_name: "mongo-router"
@@ -22,10 +22,13 @@ services:
         command: mongos --configdb cnf-serv/mongo-cnf-1:27017,mongo-cnf-2:27017,mongo-cnf-3:27017 --port 27017 --bind_ip 0.0.0.0
         restart: always
         environment:
-          - MONGO_DATA_DIR=/data/db
-          - MONGO_LOG_DIR=/dev/null
-        volumes:
-            - ./data/shard/node1:/data/db
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
+        # volumes:
+        # 路由节点不需要数据文件
+        # - ./data/shard/node1/db:/data/db
+        # 路由节点不需要配置文件
+        # - ./data/shard/node1/configdb:/data/configdb
 
     mongo-shard-setup:
         container_name: "mongo-shard-setup"
@@ -50,5 +53,5 @@ services:
             - PORT1=27017
             - PORT2=27017
             - PORT3=27017
-        entrypoint: [ "/scripts/init-shard.sh" ]
+        entrypoint: ["/scripts/init-shard.sh"]
         restart: on-failure:20

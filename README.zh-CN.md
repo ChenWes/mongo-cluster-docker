@@ -17,6 +17,11 @@ For details description, steps and discussion go to:
 
 关于mongod的配置文件，请参考[https://www.jianshu.com/p/f9f1454f251f](!https://www.jianshu.com/p/f9f1454f251f)
 
+# 网络
+首次运行先创建子网络，已经创建了则不需要再创建
+```
+docker network create --driver=bridge --subnet=172.33.0.0/16 --gateway=172.33.0.1 mongo_net
+```
 # 运行
 因为权限的问题，如果是从Windows电脑复制到Linux服务器的，在运行前一定要先进行授权
 ```
