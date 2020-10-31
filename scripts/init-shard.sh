@@ -16,6 +16,23 @@ mongodb33=`getent hosts ${MONGO33} | awk '{ print $1 }'`
 
 port=${PORT:-27017}
 
+echo "Setting for startup.."
+echo mongodb1 $mongodb1
+
+echo mongodb11 $mongodb11
+echo mongodb12 $mongodb12
+echo mongodb13 $mongodb13
+
+echo mongodb21 $mongodb21
+echo mongodb22 $mongodb22
+echo mongodb23 $mongodb23
+
+echo mongodb31 $mongodb31
+echo mongodb32 $mongodb32
+echo mongodb33 $mongodb33
+
+echo port $port
+
 echo "Waiting for startup.."
 until mongo --host ${mongodb1}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
   printf '.'

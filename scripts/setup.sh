@@ -6,6 +6,12 @@ mongodb3=`getent hosts ${MONGO3} | awk '{ print $1 }'`
 
 port=${PORT:-27017}
 
+echo "Setting for startup.."
+echo mongodb1 $mongodb1
+echo mongodb2 $mongodb2
+echo mongodb3 $mongodb3
+echo port $port
+
 echo "Waiting for startup.."
 until mongo --host ${mongodb1}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
   printf '.'
