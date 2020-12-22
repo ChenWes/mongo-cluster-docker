@@ -22,14 +22,15 @@ For details description, steps and discussion go to:
 ```
 docker network create --driver=bridge --subnet=172.33.0.0/16 --gateway=172.33.0.1 mongo_net
 ```
+
 # 运行
 因为权限的问题，如果是从Windows电脑复制到Linux服务器的，在运行前一定要先进行授权
 ```
-cd scripts && chmod +x setup.sh init-shard.sh setup-cnf.sh && cd ..
+chmod +x ./scripts/setup.sh ./scripts/init-shard.sh ./scripts/setup-cnf.sh
 ```
 再运行Docker-Compose脚本
 ```
-docker-compose -f docker-compose.1.yml -f docker-compose.2.yml  -f docker-compose.cnf.yml -f docker-compose.shard.yml up
+docker-compose -f docker-compose.1.yml -f docker-compose.2.yml  -f docker-compose.cnf.yml -f docker-compose.shard.yml up -d
 ```
 
 
