@@ -129,7 +129,6 @@ Basically `mongosetup` service is now splitted to multiple `yml` files. :)
 # 特别注意
 
 该集群现在所有的数据是`保存在文件夹中的`，第一次初始化后，后期不删除容器只能重新启动容器，但如果是将容器删除后，则需要`再次初始化`，且上一次初始化成集群后的`数据也将不可见`。
-按
 
 
 
