@@ -17,11 +17,7 @@ For details description, steps and discussion go to:
 
 关于mongod的配置文件，请参考[https://www.jianshu.com/p/f9f1454f251f](!https://www.jianshu.com/p/f9f1454f251f)
 
-# 网络
-首次运行先创建子网络，已经创建了则不需要再创建
-```
-docker network create --driver=bridge --subnet=172.33.0.0/16 --gateway=172.33.0.1 mongo_net
-```
+
 
 # 运行
 因为权限的问题，如果是从Windows电脑复制到Linux服务器的，在运行前一定要先进行授权
@@ -132,7 +128,7 @@ Basically `mongosetup` service is now splitted to multiple `yml` files. :)
 
 # 特别注意
 
-该集群现在所有的数据是`没有保存的`，需要`增加节点的保存能力`
+该集群现在所有的数据是`保存在文件夹中的`，第一次初始化后，后期不删除容器只能重新启动容器，但如果是将容器删除后，则需要`再次初始化`，且上一次初始化成集群后的`数据也将不可见`。
 按
 
 
